@@ -1,10 +1,11 @@
-'use client';  // This should be used only if you're working with a framework that supports SSR, like Next.js.
+
+import React, { useEffect } from 'react';
+import Link from 'next/link'; // Import Link from next/link
+import useCartStore from '@/store/useCartStore';
 
 import '@/app/globals.css';
 import '@/assets/frontend/css/style-prefix.css';
 import Image from 'next/image';
-import LogoUmeda from '@/assets/frontend/images/umeda-logo.png';
-import ElectronicBanner1 from '@/assets/frontend/images/electronics-banner-1.jpg';
 
 // Ensure correct imports
 import { IonIcon } from '@ionic/react';
@@ -17,9 +18,9 @@ export default function HeaderMain() {
 
       <div className="header-main">
         <div className="container">
-          <a href="#" className="header-logo">
-            <Image src={LogoUmeda} alt="Umeda's logo" width="120" height="36" />
-          </a>
+          <Link href="#" className="header-logo">
+            <Image src="/assets/frontend/images/umeda-logo.png" alt="Umeda's logo" width="120" height="36" />
+          </Link>
 
           <div className="header-search-container">
             <input
@@ -60,113 +61,137 @@ export default function HeaderMain() {
         <div className="container">
           <ul className="desktop-menu-category-list">
             <li className="menu-category">
-              <a href="#" className="menu-title">Home</a>
+              <Link href="/" className="menu-title">Home</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/kategori-produk-2" className="menu-title">kategori 2</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/produk" className="menu-title">produk</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/katalog" className="menu-title">katalog</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/garansi" className="menu-title">garansi</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/tentang" className="menu-title">tentang</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/kontak" className="menu-title">kontak</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/faq" className="menu-title">faq</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/artikel" className="menu-title">artikel</Link>
             </li>
 
-            <li className="menu-category">
-              <a href="#" className="menu-title">Categories</a>
+            <li className="menu-category" hidden>
+              <Link href="#" className="menu-title">Categories</Link>
               <div className="dropdown-panel">
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Electronics</a>
+                    <Link href="#">Electronics</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Desktop</a>
+                    <Link href="#">Desktop</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Laptop</a>
+                    <Link href="#">Laptop</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Camera</a>
+                    <Link href="#">Camera</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Tablet</a>
+                    <Link href="#">Tablet</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Headphone</a>
+                    <Link href="#">Headphone</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
-                      <Image src={ElectronicBanner1} alt="headphone collection" width="250" height="119" />
-                    </a>
+                    <Link href="#">
+                      <Image src="/assets/frontend/images/electronics-banner-1.jpg" alt="headphone collection" width="250" height="119" />
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Men's</a>
+                    <Link href="#">Men's</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Formal</a>
+                    <Link href="#">Formal</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Casual</a>
+                    <Link href="#">Casual</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Sports</a>
+                    <Link href="#">Sports</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Jacket</a>
+                    <Link href="#">Jacket</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Sunglasses</a>
+                    <Link href="#">Sunglasses</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
-                      <Image src="./assets/images/mens-banner.jpg" alt="men's fashion" width="250" height="119" />
-                    </a>
+                    <Link href="#">
+                      <Image src="/assets/frontend/images/mens-banner.jpg" alt="men's fashion" width="250" height="119" />
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Women's</a>
+                    <Link href="#">Women's</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Formal</a>
+                    <Link href="#">Formal</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Casual</a>
+                    <Link href="#">Casual</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Perfume</a>
+                    <Link href="#">Perfume</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Cosmetics</a>
+                    <Link href="#">Cosmetics</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Bags</a>
+                    <Link href="#">Bags</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
-                      <Image src="./assets/images/womens-banner.jpg" alt="women's fashion" width="250" height="119" />
-                    </a>
+                    <Link href="#">
+                      <Image src="/assets/frontend/images/womens-banner.jpg" alt="women's fashion" width="250" height="119" />
+                    </Link>
                   </li>
                 </ul>
 
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
-                    <a href="#">Electronics</a>
+                    <Link href="#">Electronics</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Smart Watch</a>
+                    <Link href="#">Smart Watch</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Smart TV</a>
+                    <Link href="#">Smart TV</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Keyboard</a>
+                    <Link href="#">Keyboard</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Mouse</a>
+                    <Link href="#">Mouse</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">Microphone</a>
+                    <Link href="#">Microphone</Link>
                   </li>
                   <li className="panel-list-item">
-                    <a href="#">
-                      <Image src="./assets/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119" />
-                    </a>
+                    <Link href="#">
+                      <Image src="/assets/frontend/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119" />
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -224,7 +249,7 @@ export default function HeaderMain() {
         <ul className="mobile-menu-category-list">
 
           <li className="menu-category">
-            <a href="#" className="menu-title">Home</a>
+            <Link href="#" className="menu-title">Home</Link>
           </li>
 
           <li className="menu-category">
@@ -241,19 +266,19 @@ export default function HeaderMain() {
             <ul className="submenu-category-list" data-accordion>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Shirt</a>
+                <Link href="#" className="submenu-title">Shirt</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Shorts & Jeans</a>
+                <Link href="#" className="submenu-title">Shorts & Jeans</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Safety Shoes</a>
+                <Link href="#" className="submenu-title">Safety Shoes</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Wallet</a>
+                <Link href="#" className="submenu-title">Wallet</Link>
               </li>
 
             </ul>
@@ -276,19 +301,19 @@ export default function HeaderMain() {
             <ul className="submenu-category-list" data-accordion>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Dress & Frock</a>
+                <Link href="#" className="submenu-title">Dress & Frock</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Earrings</a>
+                <Link href="#" className="submenu-title">Earrings</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Necklace</a>
+                <Link href="#" className="submenu-title">Necklace</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Makeup Kit</a>
+                <Link href="#" className="submenu-title">Makeup Kit</Link>
               </li>
 
             </ul>
@@ -309,19 +334,19 @@ export default function HeaderMain() {
             <ul className="submenu-category-list" data-accordion>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Earrings</a>
+                <Link href="#" className="submenu-title">Earrings</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Couple Rings</a>
+                <Link href="#" className="submenu-title">Couple Rings</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Necklace</a>
+                <Link href="#" className="submenu-title">Necklace</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Bracelets</a>
+                <Link href="#" className="submenu-title">Bracelets</Link>
               </li>
 
             </ul>
@@ -342,19 +367,19 @@ export default function HeaderMain() {
             <ul className="submenu-category-list" data-accordion>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Clothes Perfume</a>
+                <Link href="#" className="submenu-title">Clothes Perfume</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Deodorant</a>
+                <Link href="#" className="submenu-title">Deodorant</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Flower Fragrance</a>
+                <Link href="#" className="submenu-title">Flower Fragrance</Link>
               </li>
 
               <li className="submenu-category">
-                <a href="#" className="submenu-title">Air Freshener</a>
+                <Link href="#" className="submenu-title">Air Freshener</Link>
               </li>
 
             </ul>
@@ -362,11 +387,11 @@ export default function HeaderMain() {
           </li>
 
           <li className="menu-category">
-            <a href="#" className="menu-title">Blog</a>
+            <Link href="#" className="menu-title">Blog</Link>
           </li>
 
           <li className="menu-category">
-            <a href="#" className="menu-title">Hot Offers</a>
+            <Link href="#" className="menu-title">Hot Offers</Link>
           </li>
 
         </ul>
@@ -385,15 +410,15 @@ export default function HeaderMain() {
               <ul className="submenu-category-list" data-accordion>
 
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">English</a>
+                  <Link href="#" className="submenu-title">English</Link>
                 </li>
 
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">Espa&ntilde;ol</a>
+                  <Link href="#" className="submenu-title">Espa&ntilde;ol</Link>
                 </li>
 
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">Fren&ccedil;h</a>
+                  <Link href="#" className="submenu-title">Fren&ccedil;h</Link>
                 </li>
 
               </ul>
@@ -408,11 +433,11 @@ export default function HeaderMain() {
 
               <ul className="submenu-category-list" data-accordion>
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">USD &dollar;</a>
+                  <Link href="#" className="submenu-title">USD &dollar;</Link>
                 </li>
 
                 <li className="submenu-category">
-                  <a href="#" className="submenu-title">EUR &euro;</a>
+                  <Link href="#" className="submenu-title">EUR &euro;</Link>
                 </li>
               </ul>
             </li>
@@ -422,27 +447,27 @@ export default function HeaderMain() {
           <ul className="menu-social-container">
 
             <li>
-              <a href="#" className="social-link">
+              <Link href="#" className="social-link">
                 <IonIcon icon={logoFacebook} className="logo-facebook" />
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="#" className="social-link">
+              <Link href="#" className="social-link">
                 <IonIcon icon={logoTwitter} className="logo-twitter" />
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="#" className="social-link">
+              <Link href="#" className="social-link">
                 <IonIcon icon={logoInstagram} className="logo-instagram" />
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="#" className="social-link">
+              <Link href="#" className="social-link">
                 <IonIcon icon={logoLinkedin} className="logo-linkedin" />
-              </a>
+              </Link>
             </li>
 
           </ul>
