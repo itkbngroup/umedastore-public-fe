@@ -23,26 +23,11 @@ export default function HeaderMain() {
           <IonIcon icon={menuOutline} className="menu-outline" />
         </button>
 
-
-
         {/* <!-- Tombol Cart --> */}
         <button data-modal-target="top-right-modal" data-modal-toggle="top-right-modal" className=" action-btn " type="button">
           <IonIcon icon={bagHandleOutline} />
 
-          <span className="count">0</span>
-        </button>
-
-
-
-        <button className="action-btn">
-          <IonIcon icon={homeOutline} />
-
-        </button>
-
-        <button className="action-btn">
-          <IonIcon icon={heartOutline} />
-
-          <span className="count">1</span>
+          <span className="count">01</span>
         </button>
 
         <button className="action-btn" data-mobile-menu-open-btn>

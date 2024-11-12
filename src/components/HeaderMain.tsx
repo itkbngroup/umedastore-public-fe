@@ -1,3 +1,4 @@
+"use client";
 
 import React, { useEffect } from 'react';
 import Link from 'next/link'; // Import Link from next/link
@@ -14,7 +15,6 @@ import { addOutline, bagHandleOutline, caretBackOutline, closeOutline, gridOutli
 export default function HeaderMain() {
   return (
     <div>
-
 
       <div className="header-main">
         <div className="container">
@@ -208,13 +208,11 @@ export default function HeaderMain() {
           <IonIcon icon={menuOutline} className="menu-outline" />
         </button>
 
-
-
         {/* <!-- Tombol Cart --> */}
         <button data-modal-target="top-right-modal" data-modal-toggle="top-right-modal" className=" action-btn " type="button">
           <IonIcon icon={bagHandleOutline} />
 
-          <span className="count">0</span>
+          <span className="count">02</span>
         </button>
 
 
@@ -475,7 +473,6 @@ export default function HeaderMain() {
         </div>
 
       </nav>
-
 
     </div>
   );

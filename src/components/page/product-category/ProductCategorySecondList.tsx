@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ProductCategorySecondList = () => {
-  const [kategori, setKategori] = useState<any[]>([]);  // Use type 'any[]' for the kategori array
+  const [kategori, setKategori] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,8 +32,6 @@ const ProductCategorySecondList = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-
-
   return (
     <div>
       <h1>Daftar Kategori Produk</h1>
@@ -47,6 +45,7 @@ const ProductCategorySecondList = () => {
       </ul>
     </div>
   );
+
 };
 
 export default ProductCategorySecondList;

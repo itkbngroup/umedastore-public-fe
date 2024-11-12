@@ -11,20 +11,7 @@ import ProductKategoriList from '@/components/page/product-category/ProductCateg
 export default function KategoriProduk2() {
   return (
     <div>
-
-      <header>
-
-        <HeaderMain />
-        <NavigationMain />
-
-      </header>
-      <main>
-
-        <h1>Kategori produk 2 Page</h1>
-        <ProductKategoriList />
-
-      </main>
-
+      <h1>Kategori produk 2 Page</h1>
     </div>
   );
 }

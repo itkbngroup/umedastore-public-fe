@@ -1,23 +1,16 @@
-'use client'; // Make sure it's at the top
+"use client"; // Tambahkan ini di bagian paling atas
 
 import '@/app/globals.css';
 import '@/assets/frontend/css/style-prefix.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Link from 'next/link'; // For navigation to product details
-
-// Define types for product data
-interface Product {
-  id: number;
-  name: string;
-  selling_price: string;
-  image_url: string;
-}
+import { useRouter } from 'next/navigation';
 
 export default function ProdukList() {
-  const [produk, setProduk] = useState<Product[]>([]); // State for product list
-  const [loading, setLoading] = useState<boolean>(true);
+  const [kategori, setKategori] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProductList = async () => {
@@ -29,12 +22,12 @@ export default function ProdukList() {
           response.data.data &&
           Array.isArray(response.data.data.data)
         ) {
-          setProduk(response.data.data.data); // Update state with fetched products
+          setKategori(response.data.data.data);
         } else {
           throw new Error('Invalid data format');
         }
       } catch (error: any) {
-        setError('Error fetching product list');
+        setError('Error fetching ProductList');
       } finally {
         setLoading(false);
       }
@@ -48,20 +41,23 @@ export default function ProdukList() {
 
   return (
     <div>
-      <h1>Daftar Produk</h1>
+      <h1>Daftar Produk list</h1>
       <ul>
-        {produk.length > 0 ? (
-          produk.map((item) => (
+        {kategori.length > 0 ? (
+          kategori.map((item) => (
             <li key={item.id}>
-              <Link href={`/produk/${item.id}`}>
-                <h2>{item.name}</h2>
-              </Link>
+              <h2
+                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                onClick={() => router.push(`/product/${item.id}`)}
+              >
+                {item.name}
+              </h2>
               <h3>{item.selling_price}</h3>
               {item.image_url && <img src={item.image_url} alt={item.name} width={100} height={100} />}
             </li>
           ))
         ) : (
-          <li>Tidak ada produk ditemukan.</li>
+          <li>Tidak ada produk list yang ditemukan.</li>
         )}
       </ul>
     </div>

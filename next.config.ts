@@ -13,6 +13,6 @@ export default nextConfig;
 // next.config.js
 module.exports = {
   images: {
-    domains: ['pagedone.io'],  // Menambahkan domain tempat gambar Anda berasal
+    domains: ['pagedone.io', 'umedalife.jp'],  // Menambahkan domain tempat gambar Anda berasal
   },
 };
