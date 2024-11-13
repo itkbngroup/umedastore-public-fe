@@ -16,6 +16,8 @@ export default function Home() {
   return (
     <div className="bg-[#f3eee9]">
 
+
+
       <div className="container-fluid">
         <div className="swiper">
           <div className="swiper-wrapper">
@@ -36,9 +38,8 @@ export default function Home() {
         <div className="flex flex-wrap justify-center ">
 
 
-
           <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg shadow">
+            <div className="border relative overflow-hidden rounded-lg  bg-white">
               <div className="relative">
                 {/* <!-- Image Component --> */}
                 <Image
@@ -55,14 +56,15 @@ export default function Home() {
                 </h3>
 
                 <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
                 </div>
               </div>
             </div>
           </div>
 
+
           <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg">
+            <div className="border relative overflow-hidden rounded-lg  bg-white">
               <div className="relative">
                 {/* <!-- Image Component --> */}
                 <Image
@@ -79,7 +81,80 @@ export default function Home() {
                 </h3>
 
                 <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-1/2 lg:w-1/3 p-2 ">
+            <div className="border relative overflow-hidden rounded-lg bg-white">
+              <div className="relative">
+                {/* <!-- Image Component --> */}
+                <Image
+                  src="/assets/frontend/images/umeda-besu.png"
+                  width={900}
+                  height={900}
+                  className="w-full h-full object-cover z-10"
+                  alt="Umeda's img1"
+                />
+
+                {/* <!-- Title over Image --> */}
+                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
+                  umeda besu
+                </h3>
+
+                <div className="py-10">
+                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div className="w-1/2 lg:w-1/3 p-2">
+            <div className="border relative overflow-hidden rounded-lg  bg-white">
+              <div className="relative">
+                {/* <!-- Image Component --> */}
+                <Image
+                  src="/assets/frontend/images/umeda-bru.png"
+                  width={900}
+                  height={900}
+                  className="w-full h-full object-cover z-10"
+                  alt="Umeda's img1"
+                />
+
+                {/* <!-- Title over Image --> */}
+                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
+                  umeda bru
+                </h3>
+
+                <div className="py-10">
+                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-1/2 lg:w-1/3 p-2">
+            <div className="border relative overflow-hidden rounded-lg bg-white">
+              <div className="relative">
+                {/* <!-- Image Component --> */}
+                <Image
+                  src="/assets/frontend/images/umeda-dx208e.png"
+                  width={900}
+                  height={900}
+                  className="w-full h-full object-cover z-10"
+                  alt="Umeda's img1"
+                />
+
+                {/* <!-- Title over Image --> */}
+                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
+                  umeda dx208e
+                </h3>
+
+                <div className="py-10">
+                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
                 </div>
               </div>
             </div>
@@ -103,80 +178,7 @@ export default function Home() {
                 </h3>
 
                 <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-10"></div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-air-360-display-image-96fe679de16c4f5e846144eb186690ce.jpg"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  Card Title
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-10"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-air-360-display-image-96fe679de16c4f5e846144eb186690ce.jpg"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  Card Title
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-10"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-air-360-display-image-96fe679de16c4f5e846144eb186690ce.jpg"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  Card Title
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
                 </div>
               </div>
             </div>

@@ -17,7 +17,7 @@ export default function HeaderMain() {
   return (
     <div>
 
-      <div className="mobile-bottom-navigation">
+      <div className="mobile-bottom-navigation z-100">
 
         <button className="action-btn" data-mobile-menu-open-btn>
           <IonIcon icon={menuOutline} className="menu-outline" />

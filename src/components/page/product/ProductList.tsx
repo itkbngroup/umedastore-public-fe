@@ -41,6 +41,12 @@ export default function ProdukList() {
 
   return (
     <div>
+
+
+
+
+      <br />
+      <hr />
       <h1>Daftar Produk list</h1>
       <ul>
         {kategori.length > 0 ? (

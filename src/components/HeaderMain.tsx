@@ -16,6 +16,32 @@ export default function HeaderMain() {
   return (
     <div>
 
+
+      <style jsx>{`
+            /* @font-face {
+          font-family: MontserratBold;
+          src: url('/assets/fonts/Montserrat-Bold.woff');
+        }
+
+        @font-face {
+          font-family: MontserratRegular.woff;
+          src: url('/assets/fonts/Montserrat-Regular.woff');
+        } */
+
+            * {
+              --swiper-navigation-color: #fff;
+              --swiper-pagination-color: #fff;
+              --swiper-navigation-size: 22px;
+              color: #96694C;
+              font-size: 16px;
+              font-family: "Montserrat";
+              letter-spacing: 1.5px;
+
+              /* font-family: Arial, Helvetica, sans-serif; */
+        }
+
+      `}</style>
+
       <div className="header-main">
         <div className="container">
           <Link href="#" className="header-logo">
@@ -34,14 +60,7 @@ export default function HeaderMain() {
           </div>
 
           <div className="header-user-actions">
-            <button className="action-btn">
-              <IonIcon icon={personOutline} />
-            </button>
 
-            <button className="action-btn">
-              <IonIcon icon={bagHandleOutline} />
-              <span className="count">0</span>
-            </button>
 
             <button
               data-modal-target="top-right-modal"
@@ -63,33 +82,9 @@ export default function HeaderMain() {
             <li className="menu-category">
               <Link href="/" className="menu-title">Home</Link>
             </li>
-            <li className="menu-category">
-              <Link href="/kategori-produk-2" className="menu-title">kategori 2</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/produk" className="menu-title">produk</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/katalog" className="menu-title">katalog</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/garansi" className="menu-title">garansi</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/tentang" className="menu-title">tentang</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/kontak" className="menu-title">kontak</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/faq" className="menu-title">faq</Link>
-            </li>
-            <li className="menu-category">
-              <Link href="/artikel" className="menu-title">artikel</Link>
-            </li>
 
-            <li className="menu-category" hidden>
-              <Link href="#" className="menu-title">Categories</Link>
+            <li className="menu-category" >
+              <Link href="#" className="menu-title">Produk</Link>
               <div className="dropdown-panel">
                 <ul className="dropdown-panel-list">
                   <li className="menu-title">
@@ -110,11 +105,7 @@ export default function HeaderMain() {
                   <li className="panel-list-item">
                     <Link href="#">Headphone</Link>
                   </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      <Image src="/assets/frontend/images/electronics-banner-1.jpg" alt="headphone collection" width="250" height="119" />
-                    </Link>
-                  </li>
+
                 </ul>
 
                 <ul className="dropdown-panel-list">
@@ -136,11 +127,7 @@ export default function HeaderMain() {
                   <li className="panel-list-item">
                     <Link href="#">Sunglasses</Link>
                   </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      <Image src="/assets/frontend/images/mens-banner.jpg" alt="men's fashion" width="250" height="119" />
-                    </Link>
-                  </li>
+
                 </ul>
 
                 <ul className="dropdown-panel-list">
@@ -162,11 +149,7 @@ export default function HeaderMain() {
                   <li className="panel-list-item">
                     <Link href="#">Bags</Link>
                   </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      <Image src="/assets/frontend/images/womens-banner.jpg" alt="women's fashion" width="250" height="119" />
-                    </Link>
-                  </li>
+
                 </ul>
 
                 <ul className="dropdown-panel-list">
@@ -188,16 +171,33 @@ export default function HeaderMain() {
                   <li className="panel-list-item">
                     <Link href="#">Microphone</Link>
                   </li>
-                  <li className="panel-list-item">
-                    <Link href="#">
-                      <Image src="/assets/frontend/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119" />
-                    </Link>
-                  </li>
+
                 </ul>
               </div>
             </li>
+            <li className="menu-category">
+              <Link href="/kategori-produk-2" className="menu-title">kategori 2</Link>
+            </li>
 
-            {/* Other menu items go here */}
+            <li className="menu-category">
+              <Link href="/katalog" className="menu-title">katalog</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/garansi" className="menu-title">garansi</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/tentang" className="menu-title">tentang</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/kontak" className="menu-title">kontak</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/faq" className="menu-title">faq</Link>
+            </li>
+            <li className="menu-category">
+              <Link href="/artikel" className="menu-title">artikel</Link>
+            </li>
+
           </ul>
         </div>
       </nav>
