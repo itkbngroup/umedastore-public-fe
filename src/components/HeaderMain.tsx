@@ -1,18 +1,33 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link'; // Import Link from next/link
 import useCartStore from '@/store/useCartStore';
+import axios from 'axios';
 
 import '@/app/globals.css';
 import '@/assets/frontend/css/style-prefix.css';
 import Image from 'next/image';
 
-// Ensure correct imports
 import { IonIcon } from '@ionic/react';
 import { addOutline, bagHandleOutline, caretBackOutline, closeOutline, gridOutline, heartOutline, homeOutline, logoFacebook, logoInstagram, logoLinkedin, logoTwitter, menuOutline, personOutline, removeOutline, searchOutline, star } from 'ionicons/icons';
 
 export default function HeaderMain() {
+  const [productCategories, setProductCategories] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Mengambil data dari API
+    axios.get('http://localhost:8000/api/v1/product-category-menu')
+      .then(response => {
+        if (response.data.status === 'success') {
+          setProductCategories(response.data.data); // Menyimpan data kategori produk
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching product categories:', error);
+      });
+  }, []);
+
   return (
     <div>
 
@@ -61,7 +76,6 @@ export default function HeaderMain() {
 
           <div className="header-user-actions">
 
-
             <button
               data-modal-target="top-right-modal"
               data-modal-toggle="top-right-modal"
@@ -71,6 +85,7 @@ export default function HeaderMain() {
               <IonIcon icon={bagHandleOutline} />
               <span className="count">0</span>
             </button>
+
           </div>
         </div>
       </div>
@@ -78,103 +93,40 @@ export default function HeaderMain() {
       {/* Navigation Menu */}
       <nav className="desktop-navigation-menu">
         <div className="container">
-          <ul className="desktop-menu-category-list">
+          <ul className="desktop-menu-category-list"
+          >
             <li className="menu-category">
               <Link href="/" className="menu-title">Home</Link>
             </li>
 
-            <li className="menu-category" >
+            <li className="menu-category">
               <Link href="#" className="menu-title">Produk</Link>
               <div className="dropdown-panel">
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Electronics</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Desktop</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Laptop</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Camera</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Tablet</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Headphone</Link>
-                  </li>
-
-                </ul>
-
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Men's</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Formal</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Casual</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Sports</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Jacket</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Sunglasses</Link>
-                  </li>
-
-                </ul>
-
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Women's</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Formal</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Casual</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Perfume</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Cosmetics</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Bags</Link>
-                  </li>
-
-                </ul>
-
-                <ul className="dropdown-panel-list">
-                  <li className="menu-title">
-                    <Link href="#">Electronics</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Smart Watch</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Smart TV</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Keyboard</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Mouse</Link>
-                  </li>
-                  <li className="panel-list-item">
-                    <Link href="#">Microphone</Link>
-                  </li>
-
-                </ul>
+                {/* Looping melalui kategori produk */}
+                {productCategories.map((category) => (
+                  <ul key={category.id} className="dropdown-panel-list">
+                    <li className="menu-title">
+                      {/* Link ke kategori berdasarkan slug kategori */}
+                      <Link href={`/produk/${category.product_category_second.slug}`} className="text-[#b18a70]">
+                        {category.product_category_second.name}
+                      </Link>
+                      <ul>
+                        {/* Looping produk dalam kategori tersebut */}
+                        <li className="panel-list-item">
+                          <Link
+                            href={`/produk/${category.slug}`} // Link dinamis ke halaman produk
+                            className="text-[#b18a70] font-thin"
+                          >
+                            {category.name}
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                ))}
               </div>
             </li>
+
             <li className="menu-category">
               <Link href="/kategori-produk-2" className="menu-title">kategori 2</Link>
             </li>

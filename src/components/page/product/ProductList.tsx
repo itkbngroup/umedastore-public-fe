@@ -1,7 +1,7 @@
 "use client"; // Tambahkan ini di bagian paling atas
 
-import '@/app/globals.css';
-import '@/assets/frontend/css/style-prefix.css';
+// import '@/app/globals.css';
+// import '@/assets/frontend/css/style-prefix.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -16,7 +16,6 @@ export default function ProdukList() {
     const fetchProductList = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/product');
-
         if (
           response.data.status === 'success' &&
           response.data.data &&
