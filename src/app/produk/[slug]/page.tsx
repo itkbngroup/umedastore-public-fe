@@ -1,11 +1,18 @@
-'use client';
+'use client'; // Make sure it's at the top
 
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import '@/app/globals.css';
+import '@/assets/frontend/css/style-prefix.css';
+import Link from 'next/link'; // For navigation to product details
+import Image from 'next/image';
+import { Navigation, Pagination } from 'swiper/modules';
+// import Swiper and modules styles
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'; // Import default Swiper styles
+import 'swiper/css/navigation'; // Import navigation styles (if using navigation)
+import 'swiper/css/pagination';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-
-import { IonIcon } from '@ionic/react';
-import { addOutline, hammerOutline, settingsOutline, buildOutline, ellipse, cogOutline, batteryHalfOutline, constructOutline, bagHandleOutline, caretBackOutline, closeOutline, gridOutline, heartOutline, homeOutline, logoFacebook, logoInstagram, logoLinkedin, logoTwitter, menuOutline, personOutline, removeOutline, searchOutline, star } from 'ionicons/icons';
+import axios from 'axios';
 
 interface ProductContent {
   id: string;
@@ -32,12 +39,15 @@ interface Product {
   product_content: ProductContent[];
 }
 
-const ProductPage = () => {
+
+export default function ProdukList() {
+
   const { slug } = useParams(); // Access `slug` directly from `useParams`
 
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     if (slug) {
@@ -70,296 +80,547 @@ const ProductPage = () => {
     return <div>Loading...</div>;
   }
 
+
   return (
     <div>
 
-      <style jsx>{`
-                    .nav-for-slider .swiper-slide {
-            height: auto;
-            width: auto;
-            cursor: pointer;
-           
-        }
-        .swiper-wrapper{
-            height: auto;
-        }
-        .nav-for-slider .swiper-slide img{
-            border:2px solid transparent;
-            border-radius: 10px;
-           
-        }
-        .nav-for-slider .swiper-slide-thumb-active img{
-           
-            border-color: rgb(79 70 229 );
-        }
+      <div className="container">
 
-      `}</style>
+        <Image src="https://umedalife.jp/files/images/banners/banner-202411-02.webp" width={1920} height={960} alt="women's latest fashion sale" className="banner-img" />
 
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="slider-box w-full h-full max-lg:mx-auto mx-0">
-              <div className=" nav-for-slider ">
-                <div className="swiper-wrapper">
-                  <div className="swiper-slide thumbs-slide">
-                    <img src="https://pagedone.io/asset/uploads/1700472379.png"
-                      alt="Summer Travel Bag image"
-                      className="cursor-pointer rounded-xl transition-all duration-500 object-cover" />
-                  </div>
-                  <div className=" flex flex-row space-x-3">
-                    <div className="swiper-slide thumbs-slide">
-                      <img src="https://pagedone.io/asset/uploads/1700472430.png"
-                        alt="Summer Travel Bag image"
-                        className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600 object-cover" />
-                    </div>
-                    <div className="swiper-slide thumbs-slide">
-                      <img src="https://pagedone.io/asset/uploads/1700472416.png"
-                        alt="Summer Travel Bag image"
-                        className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600 object-cover" />
-                    </div>
-                    <div className="swiper-slide thumbs-slide">
-                      <img src="https://pagedone.io/asset/uploads/1700472446.png"
-                        alt="Summer Travel Bag image"
-                        className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600 object-cover" />
-                    </div>
-                    <div className="swiper-slide thumbs-slide">
-                      <img src="https://pagedone.io/asset/uploads/1700472467.png"
-                        alt="Summer Travel Bag image"
-                        className="cursor-pointer rounded-xl transition-all duration-500 border hover:border-indigo-600 object-cover" />
-                    </div>
-                  </div>
-                </div>
+        <h4 className="font-manrope text-left underline font-bold text-4xl text-[#b18a70] mb-11 mt-8">Produk</h4>
+        <div className="flex flex-wrap justify-center ">
+
+          {/* {products.length > 0 ? (
+            products.map((item) => ( */}
+          <div className="w-1/2 lg:w-1/3 p-2 " >
+            <div className="border relative overflow-hidden rounded-lg  bg-white">
+              <div className="relative">
+
+                {selectedImage && (
+                  <Image src={selectedImage} alt={`Image of ${product.name}`} width={900} height={900} className="w-full h-full object-cover" />
+                )}
+
+                {product.product_content.map((content) => (
+                  <Link href={`/produk`}>
+
+                    <h3 className="text-lg font-semibold mt-6  text-[#96694C] text-center absolute inset-x-0 bottom-5 z-20"
+                    >
+                      {content.title}
+                    </h3>
+                  </Link>
+                ))}
+
               </div>
             </div>
+          </div>
 
-            <div className="flex justify-center items-center">
-              <div className="pro-detail w-full max-lg:max-w-[608px] lg:pl-8 xl:pl-16 max-lg:mx-auto max-lg:mt-8">
-                <div className="flex items-center justify-between gap-6 mb-6">
+          {/* ))
+          ) : (
+          <li>Tidak ada produk ditemukan.</li>
+          )} */}
+
+
+
+        </div>
+
+      </div>
+
+
+      <section className="py-24 relative">
+        <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
+          <h4 className="font-manrope text-left underline font-bold text-4xl text-[#b18a70] mb-11">Customer Review</h4>
+
+          <div className="grid grid-cols-1 gap-8">
+
+            <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
+              <div className="col-span-12 lg:col-span-10 ">
+                <div className="sm:flex gap-12">
+                  <img src="https://pagedone.io/asset/uploads/1704364459.png" alt="Robert image" className="w-32 h-32 rounded-full object-cover" />
                   <div className="text">
-                    <h2 className="font-manrope font-bold text-3xl leading-10 text-gray-900 mb-2">Yellow Summer
-                      Travel
-                      Bag
-                    </h2>
-                    <p className="text-sm font-medium text-gray-600 h4 bg-red"></p>
+                    <p className="font-medium text-lg leading-8 text-gray-900 mb-2">Robert Karmazov</p>
 
-                  </div>
-                  <button className="group transition-all duration-500 p-0.5">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle
-                        className="fill-indigo-50 transition-all duration-500 group-hover:fill-indigo-100"
-                        cx="30" cy="30" r="30"
-                      />
-                      <path
-                        className="stroke-indigo-600 transition-all duration-500 group-hover:stroke-indigo-700"
-                        d="M15 30H45M30 15V45"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-
-                  </button>
-                </div>
-                <p className="w-100 h-1 border-2 border-red-500"></p>
-
-                <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
-                  <div className="flex items-center">
-                    <h5 className="font-manrope font-semibold text-2xl leading-9 text-gray-900 ">Rp  199.00 </h5>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <p className="font-medium text-lg text-gray-900 mb-2">Color</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-lg text-gray-900 mb-2">White</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <p className="font-medium text-lg text-gray-900 mb-2">Product Dimensions</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-lg text-gray-900 mb-2">40 x 40 x 66 cm</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <p className="font-medium text-lg text-gray-900 mb-2">What's in the box</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-lg text-gray-900 mb-2">1 Unit AQ750</p>
-                    <p className="font-medium text-lg text-gray-900 mb-2">1 Hepa13</p>
-                    <p className="font-medium text-lg text-gray-900 mb-2">1 Manual Book</p>
-                    <p className="font-medium text-lg text-gray-900 mb-2">1 Kartu Garansi</p>
-                  </div>
-                </div>
-
-                <p className="font-medium text-lg text-gray-900 mb-2">Size (KG)</p>
-                <div className="grid grid-cols-2 gap-3 mb-3 min-[400px]:mb-8">
-                  {/* Item 1 */}
-                  <div className="border-gray-200 grid grid-cols-2">
-                    <div className="flex items-center justify-end mr-4 text-lg">
-                      <IonIcon icon={hammerOutline} className="add-icon text-4xl" />
-                    </div>
-                    <div className="flex items-center justify-start text-sm">
-                      <span>Nilai CADR 726 m/jam</span>
-                    </div>
-                  </div>
-
-                  {/* Item 2 */}
-                  <div className="border-gray-200 grid grid-cols-2">
-                    <div className="flex items-center justify-end mr-4 text-lg">
-                      <IonIcon icon={settingsOutline} className="add-icon text-4xl" />
-                    </div>
-                    <div className="flex items-center justify-start text-sm">
-                      <span>Nilai CADR 726 m/jam</span>
-                    </div>
-                  </div>
-
-                  {/* Item 3 */}
-                  <div className="border-gray-200 grid grid-cols-2">
-                    <div className="flex items-center justify-end mr-4 text-lg">
-                      <IonIcon icon={buildOutline} className="add-icon text-4xl" />
-                    </div>
-                    <div className="flex items-center justify-start text-sm">
-                      <span>Nilai CADR 726 m/jam</span>
-                    </div>
-                  </div>
-
-                  {/* Item 4 */}
-                  <div className="border-gray-200 grid grid-cols-2">
-                    <div className="flex items-center justify-end mr-4 text-lg">
-                      <IonIcon icon={cogOutline} className="add-icon text-4xl" />
-                    </div>
-                    <div className="flex items-center justify-start text-sm">
-                      <span>Nilai CADR 726 m/jam</span>
-                    </div>
-                  </div>
-
-                  {/* Item 5 */}
-                  <div className="border-gray-200 grid grid-cols-2">
-                    <div className="flex items-center justify-end mr-4 text-lg">
-                      <IonIcon icon={batteryHalfOutline} className="add-icon text-4xl" />
-                    </div>
-                    <div className="flex items-center justify-start text-sm">
-                      <span>Nilai CADR 726 m/jam</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center flex-col min-[400px]:flex-row gap-3 mb-3 min-[400px]:mb-8">
-                  <div className=" flex items-center justify-center border border-gray-400 rounded-full">
-                    <button
-                      className="group py-[14px] px-3 w-full border-r border-gray-400 rounded-l-full h-full flex items-center justify-center bg-white shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300">
-                      <svg className="stroke-black group-hover:stroke-black" width="22" height="22"
-                        viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.5 11H5.5" stroke="" strokeWidth="1.6" stroke-linecap="round" />
-                        <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" strokeWidth="1.6"
-                          stroke-linecap="round" />
-                        <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" strokeWidth="1.6"
-                          stroke-linecap="round" />
+                    <div className="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
                       </svg>
-                    </button>
-                    <input type="text"
-                      className="font-semibold text-gray-900 text-lg py-3 px-2 w-full min-[400px]:min-w-[75px] h-full bg-transparent placeholder:text-gray-900 text-center hover:text-indigo-600 outline-0 hover:placeholder:text-indigo-600"
-                      placeholder="1" />
-                    <button
-                      className="group py-[14px] px-3 w-full border-l border-gray-400 rounded-r-full h-full flex items-center justify-center bg-white shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300">
-                      <svg className="stroke-black group-hover:stroke-black" width="22" height="22"
-                        viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 5.5V16.5M16.5 11H5.5" stroke="#9CA3AF" strokeWidth="1.6"
-                          stroke-linecap="round" />
-                        <path d="M11 5.5V16.5M16.5 11H5.5" stroke="black" stroke-opacity="0.2"
-                          strokeWidth="1.6" stroke-linecap="round" />
-                        <path d="M11 5.5V16.5M16.5 11H5.5" stroke="black" stroke-opacity="0.2"
-                          strokeWidth="1.6" stroke-linecap="round" />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
                       </svg>
-                    </button>
-                  </div>
-                  <button
-                    className="group py-3 px-5 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-lg w-full flex items-center justify-center gap-2 shadow-sm shadow-transparent transition-all duration-500 hover:shadow-indigo-300 hover:bg-indigo-100">
-                    <svg className="stroke-indigo-600 transition-all duration-500 group-hover:stroke-indigo-600"
-                      width="22" height="22" viewBox="0 0 22 22" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M10.7394 17.875C10.7394 18.6344 10.1062 19.25 9.32511 19.25C8.54402 19.25 7.91083 18.6344 7.91083 17.875M16.3965 17.875C16.3965 18.6344 15.7633 19.25 14.9823 19.25C14.2012 19.25 13.568 18.6344 13.568 17.875M4.1394 5.5L5.46568 12.5908C5.73339 14.0221 5.86724 14.7377 6.37649 15.1605C6.88573 15.5833 7.61377 15.5833 9.06984 15.5833H15.2379C16.6941 15.5833 17.4222 15.5833 17.9314 15.1605C18.4407 14.7376 18.5745 14.0219 18.8421 12.5906L19.3564 9.84059C19.7324 7.82973 19.9203 6.8243 19.3705 6.16215C18.8207 5.5 17.7979 5.5 15.7522 5.5H4.1394ZM4.1394 5.5L3.66797 2.75"
-                        stroke="" strokeWidth="1.6" stroke-linecap="round" />
-                    </svg>
-                    Add to cart</button>
-                </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <p className="font-medium text-lg leading-8 text-gray-400 lg:text-left whitespace-nowrap">Nov 01,
+                      2023</p>
 
-              </div>
-            </div>
 
-          </div>
-        </div>
-      </section>
+                    <p className="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.  </p>
+                    <div className="flex items-center justify-between">
+                      <div className="cursor-pointers flex items-center gap-2">
 
-      <section className="py-24">
-        <div className="w-full ">
-          <div className="flex justify-center items-center">
-            <div className="pro-detail w-full max-lg:max-w-[608px] lg:pl-8 xl:pl-16 max-lg:mx-auto max-lg:mt-8">
-              <p className="font-medium text-lg text-gray-900 mb-2">Tentang Produk</p>
-              <div className="grid grid-cols-2 gap-3 mb-3 min-[400px]:mb-8">
-                {/* Item 1 */}
-                <div className="border-gray-200 grid grid-cols-2">
-                  <div className="flex items-center justify-end mr-4 text-lg">
-                    <IonIcon icon={ellipse} className="add-icon " />
-                  </div>
-                  <div className="flex items-center justify-start text-sm">
-                    <span>NIDEC Japanese DC Motor untuk konsumsi listrik rendah dan ketahanan umur pemakaian </span>
-                  </div>
-                </div>
+                        <div className="flex gap-2">
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-1.jpg" alt="" />
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-2.jpg" alt="" />
+                        </div>
 
-                {/* Item 2 */}
-                <div className="border-gray-200 grid grid-cols-2">
-                  <div className="flex items-center justify-end mr-4 text-lg">
-                    <IonIcon icon={ellipse} className="add-icon " />
-                  </div>
-                  <div className="flex items-center justify-start text-sm">
-                    <span>Dapat menambah minyak aromaterapi</span>
-                  </div>
-                </div>
+                      </div>
 
-                {/* Item 3 */}
-                <div className="border-gray-200 grid grid-cols-2">
-                  <div className="flex items-center justify-end mr-4 text-lg">
-                    <IonIcon icon={ellipse} className="add-icon " />
-                  </div>
-                  <div className="flex items-center justify-start text-sm">
-                    <span>Lapisan H13 hepa filter menyaring partikel debu sampai dengan 0,1 mikron</span>
-                  </div>
-                </div>
-
-                {/* Item 4 */}
-                <div className="border-gray-200 grid grid-cols-2">
-                  <div className="flex items-center justify-end mr-4 text-lg">
-                    <IonIcon icon={ellipse} className="add-icon " />
-                  </div>
-                  <div className="flex items-center justify-start text-sm">
-                    <span>Memiliki 3 pilihan kecepatan </span>
-                  </div>
-                </div>
-
-                {/* Item 5 */}
-                <div className="border-gray-200 grid grid-cols-2">
-                  <div className="flex items-center justify-end mr-4 text-lg">
-                    <IonIcon icon={ellipse} className="add-icon " />
-                  </div>
-                  <div className="flex items-center justify-start text-sm">
-                    <span>Memiliki 3 pilihan waktu bekerja, 1-2 jam</span>
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
+
+            <div className="pb-8 border-b border-gray-100 w-full"></div>
+            <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
+              <div className="col-span-12 lg:col-span-10 ">
+                <div className="sm:flex gap-12">
+                  <img src="https://pagedone.io/asset/uploads/1704364459.png" alt="Robert image" className="w-32 h-32 rounded-full object-cover" />
+                  <div className="text">
+                    <p className="font-medium text-lg leading-8 text-gray-900 mb-2">Robert Karmazov</p>
+
+                    <div className="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <p className="font-medium text-lg leading-8 text-gray-400 lg:text-left whitespace-nowrap">Nov 01,
+                      2023</p>
+
+
+                    <p className="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.  </p>
+                    <div className="flex items-center justify-between">
+                      <div className="cursor-pointers flex items-center gap-2">
+
+                        <div className="flex gap-2">
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-1.jpg" alt="" />
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-2.jpg" alt="" />
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="pb-8 border-b border-gray-100 w-full"></div>
+            <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
+              <div className="col-span-12 lg:col-span-10 ">
+                <div className="sm:flex gap-12">
+                  <img src="https://pagedone.io/asset/uploads/1704364459.png" alt="Robert image" className="w-32 h-32 rounded-full object-cover" />
+                  <div className="text">
+                    <p className="font-medium text-lg leading-8 text-gray-900 mb-2">Robert Karmazov</p>
+
+                    <div className="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <p className="font-medium text-lg leading-8 text-gray-400 lg:text-left whitespace-nowrap">Nov 01,
+                      2023</p>
+
+
+                    <p className="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.  </p>
+                    <div className="flex items-center justify-between">
+                      <div className="cursor-pointers flex items-center gap-2">
+
+                        <div className="flex gap-2">
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-1.jpg" alt="" />
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-2.jpg" alt="" />
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="pb-8 border-b border-gray-100 w-full"></div>
+            <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
+              <div className="col-span-12 lg:col-span-10 ">
+                <div className="sm:flex gap-12">
+                  <img src="https://pagedone.io/asset/uploads/1704364459.png" alt="Robert image" className="w-32 h-32 rounded-full object-cover" />
+                  <div className="text">
+                    <p className="font-medium text-lg leading-8 text-gray-900 mb-2">Robert Karmazov</p>
+
+                    <div className="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <p className="font-medium text-lg leading-8 text-gray-400 lg:text-left whitespace-nowrap">Nov 01,
+                      2023</p>
+
+
+                    <p className="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.  </p>
+                    <div className="flex items-center justify-between">
+                      <div className="cursor-pointers flex items-center gap-2">
+
+                        <div className="flex gap-2">
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-1.jpg" alt="" />
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-2.jpg" alt="" />
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="pb-8 border-b border-gray-100 w-full"></div>
+            <div className="grid grid-cols-12 max-w-sm sm:max-w-full mx-auto">
+              <div className="col-span-12 lg:col-span-10 ">
+                <div className="sm:flex gap-12">
+                  <img src="https://pagedone.io/asset/uploads/1704364459.png" alt="Robert image" className="w-32 h-32 rounded-full object-cover" />
+                  <div className="text">
+                    <p className="font-medium text-lg leading-8 text-gray-900 mb-2">Robert Karmazov</p>
+
+                    <div className="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                        fill="none">
+                        <g clip-path="url(#clip0_13624_2090)">
+                          <path
+                            d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                            fill="#FBBF24" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_13624_2090">
+                            <rect width="30" height="30" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <p className="font-medium text-lg leading-8 text-gray-400 lg:text-left whitespace-nowrap">Nov 01,
+                      2023</p>
+
+
+                    <p className="font-normal text-base leading-7 text-gray-400 mb-4 lg:pr-8">One of the standout features of Pagedone is its intuitive and user-friendly interface. Navigating through the system feels natural, and the layout makes it easy to locate and utilize various design elements. This is particularly beneficial for designers looking to streamline their workflow.  </p>
+                    <div className="flex items-center justify-between">
+                      <div className="cursor-pointers flex items-center gap-2">
+
+                        <div className="flex gap-2">
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-1.jpg" alt="" />
+                          <img className="h-32 w-20 rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-photo-2.jpg" alt="" />
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
 
     </div >
   );
-};
-
-export default ProductPage;
+}

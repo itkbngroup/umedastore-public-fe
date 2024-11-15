@@ -9,14 +9,44 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'; // Import default Swiper styles
 import 'swiper/css/navigation'; // Import navigation styles (if using navigation)
 import 'swiper/css/pagination';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Link from 'next/link';
 
-
-// Menggunakan modul-modul Swiper dalam komponen Swiper
 export default function Home() {
+
+  const [categories, setCategoris] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Mengambil data produk menggunakan axios
+  const fetchCategories = async () => {
+    setLoading(true);  // Set loading menjadi true saat mulai mengambil data
+    try {
+      const response = await axios.get('http://localhost:8000/api/v1/product');
+      if (response.data.status === 'success') {
+        setCategoris(response.data.data.data);  // Menyimpan data produk
+      } else {
+        setError('Failed to fetch products');  // Menangani jika status bukan 'success'
+      }
+    } catch (err) {
+      setError('Error fetching products');  // Menangani error
+    } finally {
+      setLoading(false);  // Menghentikan loading setelah selesai
+    }
+  };
+
+  // Mengambil data saat komponen pertama kali dimuat
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;  // Menampilkan loading saat data sedang diambil
+  if (error) return <div>{error}</div>;  // Menampilkan error jika ada
+
+
   return (
     <div className="bg-[#f3eee9]">
-
-
 
       <div className="container-fluid">
         <div className="swiper">
@@ -38,151 +68,44 @@ export default function Home() {
         <div className="flex flex-wrap justify-center ">
 
 
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg  bg-white">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-air-360-display-image-96fe679de16c4f5e846144eb186690ce.jpg"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
+          {categories.length > 0 ? (
+            categories.map((item) => (
+              <div className="w-1/2 lg:w-1/3 p-2" key={item.product_category_first.product_category_second.slug}>
+                {item.product_category_first && item.product_category_first.product_category_second && (
 
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  Umeda air 360
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <Link href={`/api/v1/produk/${item.product_category_first.product_category_second.slug}`}>
+                    <div className="border relative overflow-hidden rounded-lg bg-white">
+                      <div className="relative">
+                        {/* Gambar Produk */}
+                        {item.image_url && (
+                          <Image
+                            src={item.image_url}
+                            alt={`Image of ${item.name}`}
+                            width={900}
+                            height={900}
+                            className="w-full h-full object-cover py-24 z-19"
+                          />
+                        )}
 
 
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg  bg-white">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-uth700.png"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
+                        {/* Kategori Produk */}
+                        <h3 className="text-lg font-semibold text-white text-center  absolute inset-x-0 bottom-5 z-20">
+                          {item.product_category_first.product_category_second.name}
+                        </h3>
 
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  umeda uth700
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2 lg:w-1/3 p-2 ">
-            <div className="border relative overflow-hidden rounded-lg bg-white">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-besu.png"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  umeda besu
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
-                </div>
+                        {/* Gradient Overlay */}
+                        <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent z-5"></div>
+                      </div>
+                    </div>
+                  </Link>
+                )}
 
               </div>
-            </div>
-          </div>
+            ))
+          ) : (
+            <div>Tidak ada produk ditemukan.</div>
+          )}
 
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg  bg-white">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-bru.png"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  umeda bru
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg bg-white">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-dx208e.png"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  umeda dx208e
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2 lg:w-1/3 p-2">
-            <div className="border relative overflow-hidden rounded-lg">
-              <div className="relative">
-                {/* <!-- Image Component --> */}
-                <Image
-                  src="/assets/frontend/images/umeda-air-360-display-image-96fe679de16c4f5e846144eb186690ce.jpg"
-                  width={900}
-                  height={900}
-                  className="w-full h-full object-cover z-10"
-                  alt="Umeda's img1"
-                />
-
-                {/* <!-- Title over Image --> */}
-                <h3 className="text-lg font-semibold text-white text-center absolute inset-x-0 bottom-5 z-20">
-                  Card Title
-                </h3>
-
-                <div className="py-10">
-                  <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-[#b18a70] to-transparent "></div>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
         </div>
