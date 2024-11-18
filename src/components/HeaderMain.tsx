@@ -1,23 +1,23 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link'; // Import Link from next/link
-import useCartStore from '@/store/useCartStore';
 import axios from 'axios';
+import Link from 'next/link'; // Import Link from next/link
+import { useEffect, useState } from 'react';
 
 import '@/app/globals.css';
 import '@/assets/frontend/css/style-prefix.css';
 import Image from 'next/image';
 
 import { IonIcon } from '@ionic/react';
-import { addOutline, bagHandleOutline, caretBackOutline, closeOutline, gridOutline, heartOutline, homeOutline, logoFacebook, logoInstagram, logoLinkedin, logoTwitter, menuOutline, personOutline, removeOutline, searchOutline, star } from 'ionicons/icons';
+import { addOutline, bagHandleOutline, caretBackOutline, closeOutline, gridOutline, heartOutline, homeOutline, logoFacebook, logoInstagram, logoLinkedin, logoTwitter, menuOutline, removeOutline, searchOutline } from 'ionicons/icons';
+import React from 'react';
 
 export default function HeaderMain() {
   const [productCategories, setProductCategories] = useState<any[]>([]);
 
   useEffect(() => {
     // Mengambil data dari API
-    axios.get('http://localhost:8000/api/v1/product-category-menu')
+    axios.get('http://localhost:8000/api/v1/product-category')
       .then(response => {
         if (response.data.status === 'success') {
           setProductCategories(response.data.data); // Menyimpan data kategori produk
@@ -103,27 +103,160 @@ export default function HeaderMain() {
               <Link href="#" className="menu-title">Produk</Link>
               <div className="dropdown-panel">
                 {/* Looping melalui kategori produk */}
-                {productCategories.map((category) => (
-                  <ul key={category.id} className="dropdown-panel-list">
-                    <li className="menu-title">
-                      {/* Link ke kategori berdasarkan slug kategori */}
-                      <Link href={`/produk/${category.product_category_second.slug}`} className="text-[#b18a70]">
-                        {category.product_category_second.name}
-                      </Link>
-                      <ul>
-                        {/* Looping produk dalam kategori tersebut */}
-                        <li className="panel-list-item">
-                          <Link
-                            href={`/produk/${category.slug}`} // Link dinamis ke halaman produk
-                            className="text-[#b18a70] font-thin"
-                          >
-                            {category.name}
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                ))}
+                <ul className="dropdown-panel-list">
+                  <li className="menu-title ">
+                    {/* Link ke kategori berdasarkan slug kategori */}
+                    <Link href="#" className="!text-[#96694C] !font-bold !text-2xl">
+                      Air Purifier
+                    </Link>
+
+                    {/* Dropdown submenu untuk subkategori */}
+                    <ul>
+                      {/* Looping produk dalam kategori tersebut */}
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Air360
+                          Hepa 13 Air Purifier
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Dehumidifier UDH1500
+                          Smart Dehumidifier
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className="dropdown-panel-list">
+                  <li className="menu-title ">
+                    {/* Link ke kategori berdasarkan slug kategori */}
+                    <Link href="#" className="!text-[#96694C] !font-bold !text-2xl">
+                      Audio
+                    </Link>
+
+                    {/* Dropdown submenu untuk subkategori */}
+                    <ul>
+                      {/* Looping produk dalam kategori tersebut */}
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Besu
+                          Bluetooth Speaker Table
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className="dropdown-panel-list">
+                  <li className="menu-title">
+                    {/* Link ke kategori berdasarkan slug kategori */}
+                    <Link href="#" className="!text-[#96694C] !font-bold !text-2xl">
+                      Beauty & Care
+                    </Link>
+
+                    {/* Dropdown submenu untuk subkategori */}
+                    <ul>
+                      {/* Looping produk dalam kategori tersebut */}
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          UTH700
+                          Travel Hair Dryer
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className="dropdown-panel-list">
+                  <li className="menu-title">
+                    {/* Link ke kategori berdasarkan slug kategori */}
+                    <Link href="#" className="!text-[#96694C] !font-bold !text-2xl">
+                      Kitchen
+                    </Link>
+
+                    {/* Dropdown submenu untuk subkategori */}
+                    <ul>
+                      {/* Looping produk dalam kategori tersebut */}
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Bru Multi Capsule Espresso Machine
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Genki Healthy Air Fryer
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Grind and Brew Coffee & Tea Maker
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Okome Low Carbo Rice Cooker
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Omuni Steam Oven Air Fryer
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className="dropdown-panel-list">
+                  <li className="menu-title">
+                    {/* Link ke kategori berdasarkan slug kategori */}
+                    <Link href="#" className="!text-[#96694C] !font-bold !text-2xl">
+                      Robot Vacuum Cleaner
+                    </Link>
+
+                    {/* Dropdown submenu untuk subkategori */}
+                    <ul>
+                      {/* Looping produk dalam kategori tersebut */}
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Tomo R2 Smart Robot Vacuum Cleaner
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Tomo R2 Smart Robot Vacuum Cleaner
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Tomo Zoom Laser Smart Robot Vacuum Cleaner
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className="dropdown-panel-list">
+                  <li className="menu-title">
+                    {/* Link ke kategori berdasarkan slug kategori */}
+                    <Link href="#" className="!text-[#96694C] !font-bold !text-2xl">
+                      Vacuum Cleaner
+                    </Link>
+
+                    {/* Dropdown submenu untuk subkategori */}
+                    <ul>
+                      {/* Looping produk dalam kategori tersebut */}
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Air360
+                          Hepa 13 Air Purifier
+                        </Link>
+                      </li>
+                      <li className="panel-list-item">
+                        <Link href="#">
+                          Dehumidifier UDH1500
+                          Smart Dehumidifier
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
             </li>
 

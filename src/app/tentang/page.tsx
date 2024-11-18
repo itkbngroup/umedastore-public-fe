@@ -80,7 +80,7 @@ export default function Tentang() {
             </p>
 
             <img
-              className="img-fluid w-100"
+              className="img-fluid w-full"
               src="https://umedalife.jp/assets/images/about-banner-2.webp"
               alt="Umeda Vacuum Cleaner, Robotic Vacuum Cleaner, Rice Cooker, Air Purifier Terbaik"
             />
