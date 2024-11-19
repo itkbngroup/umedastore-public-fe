@@ -19,6 +19,7 @@ export default function HeaderMain() {
 
       <div className="mobile-bottom-navigation z-100">
 
+
         <button className="action-btn" data-mobile-menu-open-btn>
           <IonIcon icon={menuOutline} className="menu-outline" />
         </button>
@@ -35,6 +36,9 @@ export default function HeaderMain() {
         </button>
 
       </div>
+
+
+
 
       <nav className="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
         <div className="menu-top">
